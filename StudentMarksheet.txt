@@ -1,0 +1,66 @@
+public class StudentMarksheet {
+    public String studName{get;set;}
+    public Decimal mathsMarks{get;set;}
+     public Decimal scienceMarks{get;set;}
+     public Decimal englishMarks{get;set;}
+     public Decimal totalMarks{get;set;}
+     public String percentage1{get;set;}
+     public String grade{get;set;}
+
+    
+    public pagereference generateMarksheet() {
+      
+        totalMarks = mathsMarks + scienceMarks + englishMarks;
+        Decimal percentage = ((totalMarks / 300) * 100).setScale(2);
+        percentage1 = percentage+'%';
+      
+        if (percentage >= 90) {
+            grade = 'A+';
+        } else if (percentage >= 80) {
+            grade = 'A';
+        } else if (percentage >= 70) {
+            grade = 'B';
+        } else if (percentage >= 60) {
+            grade = 'C';
+        } else if (percentage >= 50) {
+            grade = 'D';
+        } else {
+            grade = 'F';
+        }
+        return null;
+    }
+}
+
+
+<apex:page controller="StudentMarksheet">
+    <apex:form>
+        <apex:pageBlock title="Student Marksheet">
+            <apex:pageBlockSection >
+                
+                <apex:outputLabel>Enter name of the student</apex:outputLabel>
+                <apex:inputText value="{!studName}" />
+                
+                <apex:outputLabel>Enter Maths marks</apex:outputLabel>
+                <apex:inputText value="{!mathsMarks}" />
+                
+                <apex:outputLabel>Enter Science marks</apex:outputLabel>
+                <apex:inputText value="{!scienceMarks}" />
+                
+                <apex:outputLabel>Enter English marks</apex:outputLabel>
+                <apex:inputText value="{!englishMarks}"/>
+                
+                <apex:outputLabel>Total Marks:</apex:outputLabel>
+                <apex:inputText value="{!totalMarks}" />
+                
+                <apex:outputLabel>Percentage:</apex:outputLabel>
+                <apex:inputText value="{!percentage1}" />
+                
+                <apex:outputLabel>Grade:</apex:outputLabel>
+                <apex:inputText value="{!grade}" />
+                
+                <apex:commandButton value="Generate" action="{!generateMarksheet}"/>
+                
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
